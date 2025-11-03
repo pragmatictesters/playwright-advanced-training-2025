@@ -99,6 +99,14 @@ Understanding the "why" helps you:
 
 Choose your path above based on your experience level, or start with [Test Automation Basics](01-test-automation-basics.md) if you're unsure.
 
+## 🔗 What's Next?
+
+After completing the fundamentals:
+
+1. **[Installation Guide](../installation/README.md)** - Set up Playwright on your machine
+2. **[Best Practices](../best-practices/README.md)** - Learn coding conventions before writing tests
+3. **Write Your First Test** - Apply what you've learned
+
 ## 📍 Navigation
 
 - [Test Automation Basics](01-test-automation-basics.md)

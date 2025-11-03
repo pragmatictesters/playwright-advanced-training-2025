@@ -25,6 +25,13 @@ Get started with Playwright using our comprehensive installation documentation:
 - **[Official Examples](docs/installation/05-official-examples.md)** - Links to official Playwright examples
 - **[Command Reference](docs/installation/06-command-reference.md)** - Quick reference for all Playwright commands
 
+### Best Practices (Read Before Writing Tests!)
+
+Learn production-ready coding standards and conventions:
+
+- **[Best Practices Hub](docs/best-practices/README.md)** - Overview and learning paths
+- **[Coding Conventions](docs/best-practices/01-coding-conventions.md)** - Naming conventions, code organization, and TypeScript best practices
+
 ## 🚀 Quick Start
 
 ```bash

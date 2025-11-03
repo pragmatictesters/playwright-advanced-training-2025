@@ -46,16 +46,18 @@ Select the guide that matches your experience level and time availability:
 1. Start with [Complete Installation Guide](02-complete-guide.md)
 2. Keep [Command Reference](06-command-reference.md) open while learning
 3. Reference [Troubleshooting Guide](04-troubleshooting.md) if you encounter issues
-4. Explore [Official Examples](05-official-examples.md) for hands-on learning
-5. Check [Advanced Topics](03-advanced-topics.md) as needed
+4. **Read [Best Practices - Coding Conventions](../best-practices/01-coding-conventions.md)** before writing tests
+5. Explore [Official Examples](05-official-examples.md) for hands-on learning
+6. Check [Advanced Topics](03-advanced-topics.md) as needed
 
 ### Path 2: Experienced Developer
 1. Start with [Quick Start Guide](01-quick-start.md)
 2. Bookmark [Command Reference](06-command-reference.md) for quick lookup
-3. Explore [Official Examples](05-official-examples.md) for best practices
-4. Refer to [Complete Guide](02-complete-guide.md) for specific details
-5. Use [Advanced Topics](03-advanced-topics.md) for production setup
-6. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
+3. **Read [Best Practices - Coding Conventions](../best-practices/01-coding-conventions.md)** before writing tests
+4. Explore [Official Examples](05-official-examples.md) for best practices
+5. Refer to [Complete Guide](02-complete-guide.md) for specific details
+6. Use [Advanced Topics](03-advanced-topics.md) for production setup
+7. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
 
 ### Path 3: DevOps/CI Engineer
 1. Skim [Quick Start Guide](01-quick-start.md)
@@ -91,5 +93,6 @@ Select the guide that matches your experience level and time availability:
 - [Troubleshooting](04-troubleshooting.md)
 - [Official Examples](05-official-examples.md)
 - [Command Reference](06-command-reference.md)
+- [Best Practices](../best-practices/README.md) ← **Read before writing tests!**
 - [← Back to Main README](../../README.md)
 
