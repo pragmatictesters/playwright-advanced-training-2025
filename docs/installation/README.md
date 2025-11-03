@@ -2,6 +2,8 @@
 
 Welcome to the Playwright installation documentation for the Advanced Training 2025 workshop.
 
+> **New to test automation?** Start with [Fundamentals](../fundamentals/README.md) to understand the "why" before the "how".
+
 ## 📚 Choose Your Learning Path
 
 Select the guide that matches your experience level and time availability:

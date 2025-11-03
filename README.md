@@ -4,6 +4,15 @@ Hands-on Playwright + AI-Powered Test Automation training — examples, exercise
 
 ## 📚 Documentation
 
+### Fundamentals (Start Here!)
+
+New to test automation? Start with the fundamentals:
+
+- **[Fundamentals Hub](docs/fundamentals/README.md)** - Overview and learning paths
+- **[Test Automation Basics](docs/fundamentals/01-test-automation-basics.md)** - The 5 Ws and Test Pyramid
+- **[Playwright Overview](docs/fundamentals/02-playwright-overview.md)** - Tool comparison (vs Selenium, Cypress)
+- **[Getting Started Checklist](docs/fundamentals/03-getting-started.md)** - Before you write your first test
+
 ### Installation Guides
 
 Get started with Playwright using our comprehensive installation documentation:
