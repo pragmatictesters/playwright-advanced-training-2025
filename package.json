@@ -1,0 +1,23 @@
+{
+  "name": "playwright-advanced-training-2025",
+  "version": "1.0.0",
+  "description": "Hands-on Playwright + AI-Powered Test Automation training — examples, exercises, scripts, and best practices from the global online workshop (Nov 2025).",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pragmatictesters/playwright-advanced-training-2025.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/pragmatictesters/playwright-advanced-training-2025/issues"
+  },
+  "homepage": "https://github.com/pragmatictesters/playwright-advanced-training-2025#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0"
+  }
+}
