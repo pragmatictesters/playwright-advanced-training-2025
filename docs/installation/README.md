@@ -31,22 +31,29 @@ Select the guide that matches your experience level and time availability:
 - **For**: Learning from real-world examples
 - **Covers**: Links to official Playwright examples, community projects, and why `tests-examples/` folder is no longer created
 
+### ⌨️ [Command Reference](06-command-reference.md)
+- **Time**: Quick reference
+- **For**: Everyone - keep this handy during development
+- **Covers**: All Playwright commands, options, and common workflows
+
 ---
 
 ## 🎯 Recommended Learning Paths
 
 ### Path 1: Complete Beginner
 1. Start with [Complete Installation Guide](02-complete-guide.md)
-2. Reference [Troubleshooting Guide](04-troubleshooting.md) if you encounter issues
-3. Explore [Official Examples](05-official-examples.md) for hands-on learning
-4. Check [Advanced Topics](03-advanced-topics.md) as needed
+2. Keep [Command Reference](06-command-reference.md) open while learning
+3. Reference [Troubleshooting Guide](04-troubleshooting.md) if you encounter issues
+4. Explore [Official Examples](05-official-examples.md) for hands-on learning
+5. Check [Advanced Topics](03-advanced-topics.md) as needed
 
 ### Path 2: Experienced Developer
 1. Start with [Quick Start Guide](01-quick-start.md)
-2. Explore [Official Examples](05-official-examples.md) for best practices
-3. Refer to [Complete Guide](02-complete-guide.md) for specific details
-4. Use [Advanced Topics](03-advanced-topics.md) for production setup
-5. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
+2. Bookmark [Command Reference](06-command-reference.md) for quick lookup
+3. Explore [Official Examples](05-official-examples.md) for best practices
+4. Refer to [Complete Guide](02-complete-guide.md) for specific details
+5. Use [Advanced Topics](03-advanced-topics.md) for production setup
+6. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
 
 ### Path 3: DevOps/CI Engineer
 1. Skim [Quick Start Guide](01-quick-start.md)
@@ -81,5 +88,6 @@ Select the guide that matches your experience level and time availability:
 - [Advanced Topics](03-advanced-topics.md)
 - [Troubleshooting](04-troubleshooting.md)
 - [Official Examples](05-official-examples.md)
+- [Command Reference](06-command-reference.md)
 - [← Back to Main README](../../README.md)
 

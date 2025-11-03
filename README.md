@@ -14,6 +14,7 @@ Get started with Playwright using our comprehensive installation documentation:
 - **[Advanced Topics](docs/installation/03-advanced-topics.md)** - CI/CD, Docker, enterprise setups
 - **[Troubleshooting Guide](docs/installation/04-troubleshooting.md)** - Solutions to common issues
 - **[Official Examples](docs/installation/05-official-examples.md)** - Links to official Playwright examples
+- **[Command Reference](docs/installation/06-command-reference.md)** - Quick reference for all Playwright commands
 
 ## 🚀 Quick Start
 
