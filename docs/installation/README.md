@@ -26,6 +26,11 @@ Select the guide that matches your experience level and time availability:
 - **For**: Everyone - when things go wrong
 - **Covers**: Installation errors, browser issues, permissions, network problems, platform-specific fixes
 
+### 📖 [Official Examples](05-official-examples.md)
+- **Time**: Reference material
+- **For**: Learning from real-world examples
+- **Covers**: Links to official Playwright examples, community projects, and why `tests-examples/` folder is no longer created
+
 ---
 
 ## 🎯 Recommended Learning Paths
@@ -33,13 +38,15 @@ Select the guide that matches your experience level and time availability:
 ### Path 1: Complete Beginner
 1. Start with [Complete Installation Guide](02-complete-guide.md)
 2. Reference [Troubleshooting Guide](04-troubleshooting.md) if you encounter issues
-3. Explore [Advanced Topics](03-advanced-topics.md) as needed
+3. Explore [Official Examples](05-official-examples.md) for hands-on learning
+4. Check [Advanced Topics](03-advanced-topics.md) as needed
 
 ### Path 2: Experienced Developer
 1. Start with [Quick Start Guide](01-quick-start.md)
-2. Refer to [Complete Guide](02-complete-guide.md) for specific details
-3. Use [Advanced Topics](03-advanced-topics.md) for production setup
-4. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
+2. Explore [Official Examples](05-official-examples.md) for best practices
+3. Refer to [Complete Guide](02-complete-guide.md) for specific details
+4. Use [Advanced Topics](03-advanced-topics.md) for production setup
+5. Check [Troubleshooting Guide](04-troubleshooting.md) for issues
 
 ### Path 3: DevOps/CI Engineer
 1. Skim [Quick Start Guide](01-quick-start.md)
@@ -73,5 +80,6 @@ Select the guide that matches your experience level and time availability:
 - [Complete Guide](02-complete-guide.md)
 - [Advanced Topics](03-advanced-topics.md)
 - [Troubleshooting](04-troubleshooting.md)
+- [Official Examples](05-official-examples.md)
 - [← Back to Main README](../../README.md)
 
