@@ -32,18 +32,45 @@ Learn production-ready coding standards and conventions:
 - **[Best Practices Hub](docs/best-practices/README.md)** - Overview and learning paths
 - **[Coding Conventions](docs/best-practices/01-coding-conventions.md)** - Naming conventions, code organization, and TypeScript best practices
 
+### Test Files
+
+Start writing tests with our reference implementation:
+
+- **[Tests Overview](tests/README.md)** - Test organization and learning path
+- **[First Test](tests/01-first-test.spec.ts)** ⭐ - Reference implementation demonstrating all conventions
+
 ## 🚀 Quick Start
 
 ```bash
 # Install Playwright
 npm init playwright@latest
 
-# Run tests
-npx playwright test
+# Run the first test (reference implementation)
+npx playwright test 01-first-test
 
-# Open UI Mode
-npx playwright test --ui
+# Open UI Mode (recommended for learning)
+npx playwright test 01-first-test --ui
+
+# Run all tests
+npx playwright test
 ```
+
+## 📖 Learning Path
+
+**Complete Beginner?** Follow this path:
+
+1. 📚 **[Read Fundamentals](docs/fundamentals/README.md)** - Understand the WHY
+2. 🔧 **[Install Playwright](docs/installation/README.md)** - Set up your environment
+3. 📝 **[Learn Conventions](docs/best-practices/01-coding-conventions.md)** - Coding standards
+4. 🎭 **[Study First Test](tests/01-first-test.spec.ts)** - Reference implementation
+5. ✍️ **Write Your Own Tests** - Apply what you learned
+
+**Experienced Developer?** Fast track:
+
+1. 🔧 **[Quick Start Install](docs/installation/01-quick-start.md)** - 5 minutes
+2. 📝 **[Skim Conventions](docs/best-practices/01-coding-conventions.md)** - 10 minutes
+3. 🎭 **[Review First Test](tests/01-first-test.spec.ts)** - 5 minutes
+4. ✍️ **Start Building** - You're ready!
 
 ## 📖 About This Training
 
