@@ -10,6 +10,7 @@ This section covers the foundational concepts every test automation engineer sho
 - **Test Pyramid** - Understanding different testing layers and where UI automation fits
 - **Tool Landscape** - Overview of test automation tools and frameworks
 - **Playwright's Position** - How Playwright compares to other tools and when to use it
+- **Package Management** - Understanding Node.js dependencies and npm
 - **Getting Started** - Practical guidance for your first automation project
 
 ## 🎯 Learning Path
@@ -20,14 +21,16 @@ Start here if you're new to test automation:
 1. **[Test Automation Basics](01-test-automation-basics.md)** - The 5 Ws and Test Pyramid
 2. **[Playwright Overview](02-playwright-overview.md)** - Tool comparison and Playwright's strengths
 3. **[Getting Started Checklist](03-getting-started.md)** - Before you write your first test
-4. Then proceed to [Installation Guide](../installation/README.md)
+4. **[Package Management](04-package-management.md)** - Understanding npm and dependencies
+5. Then proceed to [Installation Guide](../installation/README.md)
 
 ### For Experienced Testers
 If you're familiar with test automation but new to Playwright:
 
 1. **[Playwright Overview](02-playwright-overview.md)** - See how Playwright compares to tools you know
 2. **[Getting Started Checklist](03-getting-started.md)** - Playwright-specific best practices
-3. Then jump to [Quick Start Guide](../installation/01-quick-start.md)
+3. **[Package Management](04-package-management.md)** - Quick review of npm (if needed)
+4. Then jump to [Quick Start Guide](../installation/01-quick-start.md)
 
 ### For Developers
 If you're a developer adding E2E testing:
@@ -74,6 +77,18 @@ Practical guidance:
 - Common pitfalls to avoid
 - Team readiness and collaboration
 
+### [Package Management](04-package-management.md)
+**Time**: 20-25 minutes | **For**: Understanding Node.js dependencies
+
+Essential knowledge:
+- What are package.json and package-lock.json
+- Understanding npm commands (install vs ci)
+- Version ranges and dependency management
+- npm scripts for Playwright
+- Playwright-specific package management
+- Common mistakes and solutions
+- Best practices for development and CI/CD
+
 ## 🎓 Why Start with Fundamentals?
 
 ### Understanding Before Doing
@@ -112,6 +127,7 @@ After completing the fundamentals:
 - [Test Automation Basics](01-test-automation-basics.md)
 - [Playwright Overview](02-playwright-overview.md)
 - [Getting Started Checklist](03-getting-started.md)
+- [Package Management](04-package-management.md)
 - [→ Continue to Installation](../installation/README.md)
 - [← Back to Main README](../../README.md)
 

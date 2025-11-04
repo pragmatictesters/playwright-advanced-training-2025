@@ -12,6 +12,7 @@ New to test automation? Start with the fundamentals:
 - **[Test Automation Basics](docs/fundamentals/01-test-automation-basics.md)** - The 5 Ws and Test Pyramid
 - **[Playwright Overview](docs/fundamentals/02-playwright-overview.md)** - Tool comparison (vs Selenium, Cypress)
 - **[Getting Started Checklist](docs/fundamentals/03-getting-started.md)** - Before you write your first test
+- **[Package Management](docs/fundamentals/04-package-management.md)** - Understanding npm and dependencies
 
 ### Installation Guides
 
