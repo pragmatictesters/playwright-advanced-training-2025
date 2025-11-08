@@ -155,6 +155,13 @@ Start writing tests with our reference implementation:
 - **[Tests Overview](tests/README.md)** - Test organization and learning path
 - **[First Test](tests/01-first-test.spec.ts)** ⭐ - Reference implementation demonstrating all conventions
 
+### Hands-On Exercises
+
+Practice what you learn with structured exercises:
+
+- **[Exercises Hub](docs/exercises/README.md)** - Overview and progress tracking
+- **[Day 1, Exercise 1: Getting Started](docs/exercises/day-1/exercise-1.md)** - Installation, running tests, configuration, reports
+
 ## 🚀 Quick Start
 
 ```bash
