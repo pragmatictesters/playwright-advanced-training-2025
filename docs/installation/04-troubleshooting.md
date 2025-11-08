@@ -11,6 +11,8 @@ Common installation issues and their solutions.
 - [Installation Errors](#installation-errors)
 - [Browser Issues](#browser-issues)
 - [Permission Issues](#permission-issues)
+  - [Windows: PowerShell Execution Policy Error](#windows-powershell-execution-policy-error) ⚠️
+  - [macOS: Browser Permission Issues](#macos-cannot-open-browser-permission-dialog)
 - [Network & Proxy Issues](#network--proxy-issues)
 - [Platform-Specific Issues](#platform-specific-issues)
 - [VS Code Issues](#vs-code-issues)
@@ -213,6 +215,56 @@ npx playwright test --workers=1
 
 ## Permission Issues
 
+### Windows: PowerShell Execution Policy Error
+
+> ⚠️ **IMPORTANT**: If using a work or shared PC, get administrator permission before changing execution policies!
+
+**Problem**: When running npm commands, you see errors like:
+```
+npm : File C:\Program Files\nodejs\npm.ps1 cannot be loaded because running scripts is disabled on this system.
+```
+
+This happens because Windows PowerShell blocks script execution by default for security.
+
+**Solution**: Enable script execution for your user account (safe and recommended)
+
+**Step 1**: Open PowerShell as **Administrator**
+- Press `Win + X` → Select "Windows PowerShell (Admin)" or "Terminal (Admin)"
+
+**Step 2**: Run this command:
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
+```
+
+**Step 3**: Verify it worked:
+```powershell
+Get-ExecutionPolicy -Scope CurrentUser
+# Should show: RemoteSigned
+```
+
+**Step 4**: Close and reopen your terminal, then try npm commands again.
+
+**What does this do?**
+- ✅ Allows locally created scripts to run
+- ✅ Requires downloaded scripts to be signed (secure)
+- ✅ Only affects your user account (safe)
+- ✅ Persists across sessions (one-time setup)
+
+**Alternative for corporate/restricted environments:**
+
+If the above doesn't work (Group Policy restrictions), run PowerShell with bypass each time:
+```powershell
+powershell -ExecutionPolicy Bypass
+```
+
+Then run your npm commands in that session.
+
+**Need more advanced options?**
+
+For automated scripts, PowerShell profiles, or Task Scheduler setup, see the [Windows PowerShell - Advanced Setup Guide](07-windows-powershell-advanced.md).
+
+---
+
 ### macOS: "Cannot Open Browser" Permission Dialog
 
 **Problem**: macOS Gatekeeper blocking browser execution
@@ -329,16 +381,12 @@ npm config set strict-ssl false
 
 **Problem**: Scripts disabled by execution policy
 
-**Solution**:
+**Solution**: See detailed guide in [Permission Issues → Windows: PowerShell Execution Policy Error](#windows-powershell-execution-policy-error) above.
+
+Quick fix:
 ```powershell
-# Check current policy
-Get-ExecutionPolicy
-
-# Set policy for current user
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-
-# Or run specific command
-powershell -ExecutionPolicy Bypass -Command "npx playwright test"
+# Run PowerShell as Administrator, then:
+Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned -Force
 ```
 
 ### Windows: Long Path Issues

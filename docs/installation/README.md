@@ -38,6 +38,12 @@ Select the guide that matches your experience level and time availability:
 - **For**: Everyone - keep this handy during development
 - **Covers**: All Playwright commands, options, and common workflows
 
+### 🪟 [Windows PowerShell - Advanced Setup](07-windows-powershell-advanced.md)
+- **Time**: Reference material
+- **For**: Windows users needing advanced PowerShell automation
+- **Covers**: Automated scripts, PowerShell profiles, Task Scheduler, execution policy management
+- **Note**: Most users should use the simple solution in [Troubleshooting Guide](04-troubleshooting.md#windows-powershell-execution-policy-error)
+
 ---
 
 ## 🎯 Recommended Learning Paths
@@ -93,6 +99,7 @@ Select the guide that matches your experience level and time availability:
 - [Troubleshooting](04-troubleshooting.md)
 - [Official Examples](05-official-examples.md)
 - [Command Reference](06-command-reference.md)
+- [Windows PowerShell - Advanced Setup](07-windows-powershell-advanced.md) 🪟
 - [Best Practices](../best-practices/README.md) ← **Read before writing tests!**
 - [← Back to Main README](../../README.md)
 
