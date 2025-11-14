@@ -1,0 +1,7 @@
+username,password,expectedError
+Admin,wrongpassword,Invalid credentials
+invaliduser,admin123,Invalid credentials
+,admin123,Required
+Admin,,Required
+,,Required
+WrongUser,WrongPass,Invalid credentials
