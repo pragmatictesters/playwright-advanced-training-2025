@@ -148,6 +148,12 @@ Learn production-ready coding standards and conventions:
 - **[Best Practices Hub](docs/best-practices/README.md)** - Overview and learning paths
 - **[Coding Conventions](docs/best-practices/01-coding-conventions.md)** - Naming conventions, code organization, and TypeScript best practices
 
+### Quick References
+
+Handy cheat sheets for common tasks:
+
+- **[🎹 Keyboard Keys Cheat Sheet](docs/keyboard-cheat-sheet.md)** - Complete reference for keyboard interactions (Enter, Tab, Arrows, shortcuts)
+
 ### Test Files
 
 Start writing tests with our reference implementation:
@@ -241,10 +247,20 @@ playwright-advanced-training-2025/
 ├── docs/
 │   ├── fundamentals/          # Test automation basics
 │   ├── installation/          # Setup guides
-│   └── best-practices/        # Coding conventions
+│   ├── best-practices/        # Coding conventions
+│   ├── api-testing/           # API testing guides
+│   ├── exercises/             # Hands-on exercises (Day 1-4)
+│   ├── keyboard-cheat-sheet.md  # Keyboard interactions reference
+│   └── pom-*.md               # Page Object Model guides
 ├── tests/
 │   ├── 01-first-test.spec.ts  # Reference implementation
-│   └── examples/              # Official examples
+│   ├── api/                   # API test examples
+│   ├── saucedemo/             # SauceDemo test suite
+│   ├── orangehrm/             # OrangeHRM test suite
+│   ├── pages/                 # Page Object classes
+│   └── fixtures/              # Custom fixtures
+├── utils/                     # Helper utilities
+├── test-data/                 # Test data files (CSV, JSON)
 ├── package.json               # Project configuration
 └── playwright.config.ts       # Playwright configuration
 ```
