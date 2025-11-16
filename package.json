@@ -36,6 +36,14 @@
     "test:saucedemo:fixtures:products": "playwright test tests/saucedemo/fixtures/products-fixtures.spec.ts",
     "test:day3": "playwright test tests/saucedemo/pom tests/saucedemo/fixtures",
     "test:day3:chromium": "playwright test tests/saucedemo/pom tests/saucedemo/fixtures --project=chromium",
+    "test:api": "playwright test tests/api",
+    "test:api:get": "playwright test tests/api/restful-api-dev/01-get-requests.spec.ts",
+    "test:api:crud": "playwright test tests/api/restful-api-dev/02-crud-operations.spec.ts",
+    "test:api:data-driven": "playwright test tests/api/restful-api-dev/03-data-driven.spec.ts",
+    "test:api:combined": "playwright test tests/api/restful-api-dev/04-ui-api-combined.spec.ts",
+    "test:api:fixtures": "playwright test tests/api/restful-api-dev/05-fixtures-example.spec.ts",
+    "test:day4": "playwright test tests/api",
+    "test:day4:chromium": "playwright test tests/api --project=chromium",
     "report": "playwright show-report",
     "codegen": "playwright codegen",
     "codegen:orangehrm": "playwright codegen https://opensource-demo.orangehrmlive.com/",
@@ -57,6 +65,7 @@
   "homepage": "https://github.com/pragmatictesters/playwright-advanced-training-2025#readme",
   "devDependencies": {
     "@playwright/test": "^1.56.1",
-    "@types/node": "^24.10.0"
+    "@types/node": "^24.10.0",
+    "csv-parse": "^5.6.0"
   }
 }
