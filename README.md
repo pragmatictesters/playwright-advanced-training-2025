@@ -154,6 +154,14 @@ Handy cheat sheets for common tasks:
 
 - **[🎹 Keyboard Keys Cheat Sheet](docs/keyboard-cheat-sheet.md)** - Complete reference for keyboard interactions (Enter, Tab, Arrows, shortcuts)
 
+### Third-Party Libraries
+
+Enhance your tests with powerful JavaScript libraries:
+
+- **[📦 Third-Party Libraries Hub](docs/third-party-libraries/README.md)** - Overview and library recommendations
+- **[🎭 Faker.js Guide](docs/third-party-libraries/faker-js.md)** - Generate realistic test data (names, emails, addresses)
+- **[Working Example](tests/orangehrm/employees/add-employee-faker.spec.ts)** - OrangeHRM employee creation with Faker
+
 ### Test Files
 
 Start writing tests with our reference implementation:
