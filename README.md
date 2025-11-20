@@ -140,6 +140,7 @@ Get started with Playwright using our comprehensive installation documentation:
 - **[Troubleshooting Guide](docs/installation/04-troubleshooting.md)** - Solutions to common issues
 - **[Official Examples](docs/installation/05-official-examples.md)** - Links to official Playwright examples
 - **[Command Reference](docs/installation/06-command-reference.md)** - Quick reference for all Playwright commands
+- **[🤖 AI Tools & Extensions Setup](docs/installation/08-ai-tools-setup.md)** - GitHub Copilot, Docker, VS Code extensions (Required for AI training!)
 
 ### Best Practices (Read Before Writing Tests!)
 
