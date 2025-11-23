@@ -1,27 +1,31 @@
-# Day 3: Page Object Model & Fixtures
+# Day 3: AI-Powered Testing & Shopping Cart
 
 ## 📚 Overview
 
-Day 3 focuses on organizing test code using **Page Object Model (POM)** and **Playwright Fixtures**. You'll learn how to create maintainable, reusable test code that's easy to understand and modify.
+Day 3 focuses on **AI-assisted development** with GitHub Copilot, mastering **CSS & XPath selectors**, and building **shopping cart tests** for SauceDemo. You'll learn to use modern AI tools, refactor code effectively, and write comprehensive test scenarios.
 
 ---
 
 ## 🎯 Learning Goals
 
 By the end of Day 3, you will:
-- ✅ Understand the benefits of Page Object Model
-- ✅ Create page object classes with locators and methods
-- ✅ Refactor existing tests to use page objects
-- ✅ Use Playwright fixtures for cleaner code
-- ✅ Compare different approaches (POM, Fixtures, Alternatives)
-- ✅ Apply best practices for maintainable tests
+- ✅ Use GitHub Copilot for code generation and completion
+- ✅ Use GitHub Copilot Chat for debugging and explanations
+- ✅ Master CSS and XPath selectors
+- ✅ Extract variables and refactor code
+- ✅ Group tests with `test.describe()`
+- ✅ Reuse login functionality effectively
+- ✅ Use Playwright VS Code extension for recording
+- ✅ Use DevTools Accessibility panel for locators
+- ✅ Write positive and negative test scenarios
 
 ---
 
 ## 📖 Materials
 
-### 📝 Exercise
-- **[Exercise 3: Page Object Model & Fixtures](./exercise-3-page-objects.md)** - Main hands-on exercise
+### 📝 Exercises
+- **[Exercise 1: Shopping Cart Testing](./exercise-1-shopping-cart.md)** - Main hands-on exercise (NEW!)
+- **[Exercise 3: Page Object Model & Fixtures](./exercise-3-page-objects.md)** - Advanced patterns (Day 4)
 
 ### 📚 Reference Documentation
 - **[POM vs Alternatives](../../pom-vs-alternatives.md)** - Comparison of different patterns
@@ -46,115 +50,143 @@ By the end of Day 3, you will:
 
 | Activity | Duration |
 |----------|----------|
-| Understanding POM | 30 min |
-| Creating Page Objects | 45 min |
-| Using Fixtures | 45 min |
-| **Total** | **~2 hours** |
+| GitHub Copilot Setup & Demo | 30 min |
+| CSS & XPath Selectors | 30 min |
+| DevTools Accessibility Panel | 20 min |
+| Shopping Cart Tests (Valid) | 60 min |
+| Shopping Cart Tests (Negative) | 30 min |
+| Refactoring & Variables | 20 min |
+| **Total** | **~3 hours** |
 
 ---
 
 ## 🗺️ Learning Path
 
 ```
-Day 2: Configuration & Tests
+Day 2: Login Tests
          ↓
-Day 3: Page Object Model
+Day 3: AI-Powered Shopping Cart
          ↓
-    Part 1: Why POM?
-    (Identify duplication)
+    Part 1: AI Tools Setup
+    (Copilot, Copilot Chat)
          ↓
-    Part 2: Create Page Objects
-    (LoginPage, ProductsPage)
+    Part 2: Locator Strategies
+    (CSS, XPath, Accessibility)
          ↓
-    Part 3: Add Fixtures
-    (Cleaner code)
+    Part 3: Shopping Cart Tests
+    (Add, Remove, View Cart)
          ↓
-Day 4: Advanced Patterns
+    Part 4: Refactoring
+    (Variables, Reusability)
+         ↓
+Day 4: Page Object Model
 ```
 
 ---
 
 ## 🎓 Key Concepts
 
-### 1. Page Object Model (POM)
-**What:** Design pattern that creates classes representing pages/components
+### 1. GitHub Copilot
+**What:** AI pair programmer that suggests code as you type
 
 **Benefits:**
-- Centralized locators
-- Reusable methods
-- Easier maintenance
-- Better organization
+- Faster code writing
+- Learn new patterns
+- Reduce boilerplate
+- Fix errors quickly
 
 **Example:**
 ```typescript
-class LoginPage {
-  readonly usernameInput: Locator;
-  
-  async login(username: string, password: string) {
-    // Login logic
-  }
-}
+// Type a comment and Copilot suggests code:
+// Add sauce labs backpack to cart
+await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
 ```
 
 ---
 
-### 2. Playwright Fixtures
-**What:** Dependency injection system for automatic setup/teardown
+### 2. CSS vs XPath Selectors
 
-**Benefits:**
-- No manual instantiation
-- Cleaner test code
-- Automatic lifecycle management
-- Type-safe
+| Feature | CSS | XPath |
+|---------|-----|-------|
+| **Readability** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ |
+| **Performance** | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+| **Parent Selection** | ❌ | ✅ |
+| **Text Content** | Limited | ✅ |
+| **Browser Support** | ✅ | ✅ |
 
-**Example:**
+**CSS Example:**
 ```typescript
-export const test = base.extend({
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
-  }
-});
+page.locator('[data-test="username"]')
+page.locator('.inventory_item_name')
+```
 
-// In test
-test('my test', async ({ loginPage }) => {
-  // loginPage automatically available!
-});
+**XPath Example:**
+```typescript
+page.locator('xpath=//button[@data-test="login-button"]')
+page.locator('xpath=//div[contains(text(), "Backpack")]')
 ```
 
 ---
 
-### 3. Comparison
+### 3. DevTools Accessibility Panel
+**What:** Browser tool showing element roles, names, and properties
 
-| Approach | Code Complexity | Maintainability | Beginner-Friendly |
-|----------|----------------|-----------------|-------------------|
-| No POM | ⭐ | ⭐ | ⭐⭐⭐⭐⭐ |
-| POM Only | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
-| POM + Fixtures | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ |
+**Benefits:**
+- Find reliable locators
+- Use semantic selectors
+- Better accessibility
+- More stable tests
 
-**Recommendation:** Use **POM + Fixtures** for best results! ⭐
+**Example:**
+```typescript
+// From Accessibility panel: role="button", name="Add to cart"
+await page.getByRole('button', { name: 'Add to cart' });
+```
+
+---
+
+### 4. Test Organization with describe()
+
+**Without describe:**
+```typescript
+test('add item', async ({ page }) => { });
+test('remove item', async ({ page }) => { });
+```
+
+**With describe:**
+```typescript
+test.describe('Shopping Cart - Valid Scenarios', () => {
+  test('add item', async ({ page }) => { });
+  test('remove item', async ({ page }) => { });
+});
+```
+
+**Benefits:** Better organization, shared setup, clearer reports
 
 ---
 
 ## 📊 Before & After
 
-### Before (Day 2 - No POM):
+### Before (Repetitive Code):
 ```typescript
-test('login', async ({ page }) => {
-  await page.goto('https://www.saucedemo.com/');
-  await page.locator('[data-test="username"]').fill('standard_user');
-  await page.locator('[data-test="password"]').fill('secret_sauce');
-  await page.locator('[data-test="login-button"]').click();
-  // Repeated in every test!
+test('add item', async ({ page }) => {
+  await page.locator('[data-test="add-to-cart-sauce-labs-backpack"]').click();
+  await expect(page.locator('.shopping_cart_badge')).toHaveText('1');
+  await expect(page.locator('[data-test="remove-sauce-labs-backpack"]')).toBeVisible();
 });
 ```
 
-### After (Day 3 - POM + Fixtures):
+### After (With Variables):
 ```typescript
-test('login', async ({ loginPage, productsPage }) => {
-  await loginPage.goto();
-  await loginPage.login('standard_user', 'secret_sauce');
-  await productsPage.verifyPageLoaded();
-  // Clean, reusable, maintainable!
+test('add item', async ({ page }) => {
+  // Extract variables for readability
+  const addButton = page.locator('[data-test="add-to-cart-sauce-labs-backpack"]');
+  const cartBadge = page.locator('.shopping_cart_badge');
+  const removeButton = page.locator('[data-test="remove-sauce-labs-backpack"]');
+
+  await addButton.click();
+  await expect(cartBadge).toHaveText('1');
+  await expect(removeButton).toBeVisible();
 });
 ```
 
@@ -164,56 +196,69 @@ test('login', async ({ loginPage, productsPage }) => {
 
 You've successfully completed Day 3 when you can:
 
-- [ ] Explain why POM is useful
-- [ ] Create a page object class with locators and methods
-- [ ] Use page objects in tests
-- [ ] Create custom fixtures
-- [ ] Use fixtures in tests
-- [ ] Compare POM vs Fixtures approaches
-- [ ] Apply best practices
+- [ ] Use GitHub Copilot for code generation
+- [ ] Use GitHub Copilot Chat for debugging
+- [ ] Write CSS selectors confidently
+- [ ] Write XPath selectors when needed
+- [ ] Use DevTools Accessibility panel
+- [ ] Extract variables for readability
+- [ ] Group tests with `test.describe()`
+- [ ] Reuse login functionality
+- [ ] Write 13 shopping cart tests (8 valid + 5 negative)
+- [ ] All tests pass
 
 ---
 
 ## 🚀 Getting Started
 
-1. **Read the exercise:** [Exercise 3: Page Object Model & Fixtures](./exercise-3-page-objects.md)
-2. **Review reference docs:** [POM vs Alternatives](../../pom-vs-alternatives.md)
-3. **Follow step-by-step instructions**
-4. **Run tests to verify**
-5. **Try bonus challenges**
+1. **Setup AI tools:** Install GitHub Copilot & Copilot Chat
+2. **Read the exercise:** [Exercise 1: Shopping Cart Testing](./exercise-1-shopping-cart.md)
+3. **Review Day 2 login tests** for reuse strategies
+4. **Follow step-by-step instructions**
+5. **Use Copilot to help write code**
+6. **Run tests to verify**
 
 ---
 
 ## 💡 Tips for Success
 
-1. **Start simple** - Don't overcomplicate page objects
-2. **Use TypeScript** - Type safety helps catch errors
-3. **Follow naming conventions** - Consistency matters
-4. **Keep methods focused** - Single responsibility principle
-5. **Use fixtures** - Cleaner code, less boilerplate
+1. **Use Copilot actively** - Let it suggest code, then review and modify
+2. **Try different locators** - CSS, XPath, getByRole - see what works best
+3. **Extract variables** - Makes code more readable and maintainable
+4. **Use beforeEach** - Simplest way to reuse login for this exercise
+5. **Record with VS Code** - Great way to learn locators
+6. **Check Accessibility panel** - Most reliable locator source
+7. **Ask Copilot Chat** - When stuck, ask for help!
 
 ---
 
 ## 🤝 Need Help?
 
+**AI Tools:**
+- GitHub Copilot - Inline suggestions as you type
+- GitHub Copilot Chat - Ask questions, get explanations
+- VS Code Extension - Record tests, pick locators
+
 **Resources:**
-- Exercise documentation with step-by-step instructions
-- Code examples in the repository
-- Best practices guide
-- Comparison guide
+- Exercise documentation with examples
+- CSS Selectors reference
+- XPath tutorial
+- Playwright locators docs
 
 **Common Issues:**
-- Import errors → Check file paths
-- Tests failing → Verify selectors
-- TypeScript errors → Check types
+- Copilot not working → Check GitHub login
+- Locator not found → Use DevTools to inspect
+- Test timing out → Add explicit waits
+- Login not reused → Check beforeEach placement
 
 ---
 
 ## 🎉 What's Next?
 
 After completing Day 3:
-- **Day 4:** Advanced patterns, API testing, component objects
-- **Day 5:** CI/CD integration, reporting, performance
+- **Day 4:** Page Object Model pattern
+- **Day 5:** API testing with Playwright
+- **Day 6:** CI/CD integration
 
-**Keep building your Playwright skills!** 🚀
+**You're making great progress!** 🚀
 
