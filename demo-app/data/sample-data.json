@@ -1,0 +1,107 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Alice Johnson",
+      "email": "alice@example.com",
+      "role": "Admin",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Bob Smith",
+      "email": "bob@example.com",
+      "role": "User",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Charlie Brown",
+      "email": "charlie@example.com",
+      "role": "Manager",
+      "status": "Inactive"
+    },
+    {
+      "id": 4,
+      "name": "Diana Prince",
+      "email": "diana@example.com",
+      "role": "User",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Eve Wilson",
+      "email": "eve@example.com",
+      "role": "Admin",
+      "status": "Active"
+    },
+    {
+      "id": 6,
+      "name": "Frank Miller",
+      "email": "frank@example.com",
+      "role": "User",
+      "status": "Inactive"
+    },
+    {
+      "id": 7,
+      "name": "Grace Lee",
+      "email": "grace@example.com",
+      "role": "Manager",
+      "status": "Active"
+    },
+    {
+      "id": 8,
+      "name": "Henry Davis",
+      "email": "henry@example.com",
+      "role": "User",
+      "status": "Active"
+    }
+  ],
+  "searchTerms": [
+    "Playwright",
+    "Automation",
+    "Testing",
+    "Selenium",
+    "Cypress",
+    "JavaScript",
+    "TypeScript",
+    "Python",
+    "Java",
+    "C#",
+    "Web Development",
+    "API Testing",
+    "E2E Testing",
+    "Unit Testing",
+    "Integration Testing"
+  ],
+  "credentials": {
+    "validUsers": [
+      {
+        "username": "demo",
+        "password": "password123",
+        "role": "admin"
+      },
+      {
+        "username": "testuser",
+        "password": "test123",
+        "role": "user"
+      }
+    ]
+  },
+  "apiResponses": {
+    "success": {
+      "status": 200,
+      "message": "Data retrieved successfully",
+      "data": {
+        "items": 42,
+        "timestamp": "2025-01-27T10:00:00Z"
+      }
+    },
+    "error": {
+      "status": 404,
+      "message": "Resource not found",
+      "error": "NOT_FOUND"
+    }
+  }
+}
+

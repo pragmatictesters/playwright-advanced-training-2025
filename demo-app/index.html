@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playwright Training Demo App - Pragmatic Test Labs</title>
+    <link rel="icon" type="image/png" href="assets/ptl-favicon.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-section">
+                    <img src="http://pragmatictestlabs.com/wp-content/uploads/2016/09/PTL-Logo-2.png"
+                         alt="Pragmatic Test Labs"
+                         class="ptl-logo"
+                         onerror="this.style.display='none'">
+                    <div class="header-text">
+                        <h1>🎭 Playwright Training Demo App</h1>
+                        <p class="subtitle">Pragmatic Test Labs - A comprehensive testing playground for automation engineers</p>
+                    </div>
+                </div>
+                <div id="auth-status" class="auth-status">
+                    <span id="user-info">Not logged in</span>
+                    <button id="logout-btn" class="btn btn-secondary" style="display: none;">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav-tabs" id="main-nav">
+        <button class="nav-tab active" data-section="basics">Basic Inputs</button>
+        <button class="nav-tab" data-section="forms">Form Controls</button>
+        <button class="nav-tab" data-section="dynamic">Dynamic Data</button>
+        <button class="nav-tab" data-section="interactive">Interactive</button>
+        <button class="nav-tab" data-section="popups">JS Popups</button>
+        <button class="nav-tab" data-section="async">Async Behavior</button>
+        <button class="nav-tab" data-section="advanced">Advanced</button>
+        <button class="nav-tab" data-section="auth">Authentication</button>
+    </nav>
+
+    <main class="container">
+        <!-- Section A: Basic Inputs -->
+        <section id="basics" class="section active">
+            <h2>📝 Basic Inputs</h2>
+            
+            <div class="form-group">
+                <label for="text-input">Text Input:</label>
+                <input type="text" id="text-input" data-testid="text-input" placeholder="Enter text here">
+            </div>
+
+            <div class="form-group">
+                <label for="textarea-input">Textarea:</label>
+                <textarea id="textarea-input" data-testid="textarea-input" rows="4" placeholder="Enter multiple lines"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="placeholder-input">Placeholder Field:</label>
+                <input type="text" id="placeholder-input" placeholder="This is a placeholder">
+            </div>
+
+            <div class="form-group">
+                <label for="required-input">Required Field: <span class="required">*</span></label>
+                <input type="text" id="required-input" data-testid="required-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="disabled-input">Disabled Field:</label>
+                <input type="text" id="disabled-input" data-testid="disabled-input" value="Cannot edit" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="readonly-input">Readonly Field:</label>
+                <input type="text" id="readonly-input" data-testid="readonly-input" value="Read only value" readonly>
+            </div>
+
+            <div class="button-group">
+                <button id="primary-btn" class="btn btn-primary" data-testid="primary-button">Primary Button</button>
+                <button id="secondary-btn" class="btn btn-secondary">Secondary Button</button>
+                <button id="disabled-btn" class="btn btn-primary" disabled>Disabled Button</button>
+            </div>
+
+            <div class="result-box" id="basics-result" data-testid="basics-result"></div>
+        </section>
+
+        <!-- Section B: Form Controls -->
+        <section id="forms" class="section">
+            <h2>🎛️ Form Controls</h2>
+
+            <div class="form-group">
+                <label for="dropdown">Dropdown Select:</label>
+                <select id="dropdown" data-testid="dropdown">
+                    <option value="">-- Select an option --</option>
+                    <option value="option1">Option 1</option>
+                    <option value="option2">Option 2</option>
+                    <option value="option3">Option 3</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Radio Buttons:</label>
+                <div class="radio-group">
+                    <label><input type="radio" name="radio" value="radio1" data-testid="radio-1"> Radio 1</label>
+                    <label><input type="radio" name="radio" value="radio2" data-testid="radio-2"> Radio 2</label>
+                    <label><input type="radio" name="radio" value="radio3" data-testid="radio-3"> Radio 3</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Checkboxes:</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="checkbox1" data-testid="checkbox-1" value="check1"> Checkbox 1</label>
+                    <label><input type="checkbox" id="checkbox2" data-testid="checkbox-2" value="check2"> Checkbox 2</label>
+                    <label><input type="checkbox" id="checkbox3" data-testid="checkbox-3" value="check3"> Checkbox 3</label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="toggle-switch">Toggle Switch:</label>
+                <label class="switch">
+                    <input type="checkbox" id="toggle-switch" data-testid="toggle-switch">
+                    <span class="slider"></span>
+                </label>
+                <span id="toggle-status">OFF</span>
+            </div>
+
+            <div class="form-group">
+                <label for="date-picker">Date Picker:</label>
+                <input type="date" id="date-picker" data-testid="date-picker">
+            </div>
+
+            <div class="form-group">
+                <label for="range-slider">Range Slider: <span id="slider-value">50</span></label>
+                <input type="range" id="range-slider" data-testid="range-slider" min="0" max="100" value="50">
+            </div>
+
+            <div class="form-group">
+                <label for="file-upload">File Upload:</label>
+                <input type="file" id="file-upload" data-testid="file-upload" accept=".txt,.pdf,.jpg,.png">
+                <div id="file-info" class="file-info"></div>
+            </div>
+
+            <div class="result-box" id="forms-result" data-testid="forms-result"></div>
+        </section>
+
+        <!-- Section C: Dynamic Data Components -->
+        <section id="dynamic" class="section">
+            <h2>📊 Dynamic Data Components</h2>
+
+            <div class="form-group">
+                <label for="search-input">Search (Auto-suggest):</label>
+                <input type="text" id="search-input" data-testid="search-input" placeholder="Type to search...">
+                <ul id="suggestions" class="suggestions" data-testid="suggestions"></ul>
+            </div>
+
+            <div class="table-container">
+                <h3>Sortable Table</h3>
+                <table id="data-table" data-testid="data-table">
+                    <thead>
+                        <tr>
+                            <th data-sort="name">Name <span class="sort-icon">↕</span></th>
+                            <th data-sort="email">Email <span class="sort-icon">↕</span></th>
+                            <th data-sort="role">Role <span class="sort-icon">↕</span></th>
+                            <th data-sort="status">Status <span class="sort-icon">↕</span></th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="pagination" id="pagination" data-testid="pagination">
+                <button id="prev-page" class="btn btn-secondary">Previous</button>
+                <span id="page-info">Page 1 of 2</span>
+                <button id="next-page" class="btn btn-secondary">Next</button>
+            </div>
+        </section>
+
+        <!-- Section D: Interactive Components -->
+        <section id="interactive" class="section">
+            <h2>🎨 Interactive Components</h2>
+
+            <div class="button-group">
+                <button id="open-modal-btn" class="btn btn-primary" data-testid="open-modal">Open Modal</button>
+                <button id="show-tooltip-btn" class="btn btn-primary" data-testid="show-tooltip">Hover for Tooltip</button>
+                <button id="show-toast-btn" class="btn btn-primary" data-testid="show-toast">Show Toast</button>
+            </div>
+
+            <div class="tabs-container">
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="tab1">Tab 1</button>
+                    <button class="tab-btn" data-tab="tab2">Tab 2</button>
+                    <button class="tab-btn" data-tab="tab3">Tab 3</button>
+                </div>
+                <div class="tab-content">
+                    <div id="tab1" class="tab-pane active" data-testid="tab-1-content">
+                        <p>This is Tab 1 content. Perfect for testing tab switching!</p>
+                    </div>
+                    <div id="tab2" class="tab-pane" data-testid="tab-2-content">
+                        <p>This is Tab 2 content. Test visibility and content changes.</p>
+                    </div>
+                    <div id="tab3" class="tab-pane" data-testid="tab-3-content">
+                        <p>This is Tab 3 content. Practice assertions on dynamic content.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion" data-testid="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header" data-testid="accordion-1">
+                        Accordion Item 1 <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Content for accordion item 1. Test expand/collapse behavior.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" data-testid="accordion-2">
+                        Accordion Item 2 <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Content for accordion item 2. Practice waiting for animations.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <button class="accordion-header" data-testid="accordion-3">
+                        Accordion Item 3 <span class="accordion-icon">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Content for accordion item 3. Test multiple interactions.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="drag-drop-container">
+                <h3>Drag and Drop</h3>
+                <div class="drag-area">
+                    <div class="draggable" draggable="true" data-testid="drag-item-1">Drag Item 1</div>
+                    <div class="draggable" draggable="true" data-testid="drag-item-2">Drag Item 2</div>
+                    <div class="draggable" draggable="true" data-testid="drag-item-3">Drag Item 3</div>
+                </div>
+                <div class="drop-zone" id="drop-zone" data-testid="drop-zone">
+                    Drop items here
+                </div>
+            </div>
+        </section>
+
+        <!-- Section E: JavaScript Popups -->
+        <section id="popups" class="section">
+            <h2>💬 JavaScript Popups & Dialogs</h2>
+            <p class="section-description">Practice handling JavaScript alerts, confirms, prompts, and random delayed popups.</p>
+
+            <div class="card">
+                <h3>Alert Dialog</h3>
+                <p>Simple alert message that requires acknowledgment.</p>
+                <button class="btn btn-primary" id="alert-btn" data-testid="alert-btn">Show Alert</button>
+                <div class="result-box" id="alert-result" data-testid="alert-result"></div>
+            </div>
+
+            <div class="card">
+                <h3>Confirm Dialog</h3>
+                <p>Confirmation dialog with OK/Cancel options.</p>
+                <button class="btn btn-primary" id="confirm-btn" data-testid="confirm-btn">Show Confirm</button>
+                <div class="result-box" id="confirm-result" data-testid="confirm-result"></div>
+            </div>
+
+            <div class="card">
+                <h3>Prompt Dialog</h3>
+                <p>Input dialog that asks for user text input.</p>
+                <button class="btn btn-primary" id="prompt-btn" data-testid="prompt-btn">Show Prompt</button>
+                <div class="result-box" id="prompt-result" data-testid="prompt-result"></div>
+            </div>
+
+            <div class="card">
+                <h3>Random Delayed Alert</h3>
+                <p>Alert appears after a random delay (5-20 seconds). Tests async dialog handling.</p>
+                <button class="btn btn-primary" id="random-alert-btn" data-testid="random-alert-btn">Trigger Random Alert</button>
+                <div class="result-box" id="random-alert-result" data-testid="random-alert-result">
+                    <span id="countdown-text"></span>
+                </div>
+                <button class="btn btn-secondary" id="cancel-random-btn" data-testid="cancel-random-btn" style="display: none;">Cancel</button>
+            </div>
+
+            <div class="card">
+                <h3>Multiple Popups Sequence</h3>
+                <p>Triggers alert, then confirm, then prompt in sequence.</p>
+                <button class="btn btn-primary" id="sequence-btn" data-testid="sequence-btn">Start Sequence</button>
+                <div class="result-box" id="sequence-result" data-testid="sequence-result"></div>
+            </div>
+
+            <div class="card">
+                <h3>Popup on Page Load</h3>
+                <p>Enable this to show an alert when navigating to this section.</p>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="popup-on-load" data-testid="popup-on-load">
+                    <span>Enable popup on section load</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- Section F: Async Behavior -->
+        <section id="async" class="section">
+            <h2>⏱️ Async Behavior Examples</h2>
+
+            <div class="form-group">
+                <button id="delayed-content-btn" class="btn btn-primary" data-testid="delayed-content-btn">
+                    Load Delayed Content
+                </button>
+                <div id="delayed-content" class="result-box" data-testid="delayed-content"></div>
+            </div>
+
+            <div class="form-group">
+                <button id="progress-btn" class="btn btn-primary" data-testid="progress-btn">Start Progress</button>
+                <div class="progress-bar" data-testid="progress-bar">
+                    <div id="progress-fill" class="progress-fill"></div>
+                </div>
+                <span id="progress-text">0%</span>
+            </div>
+
+            <div class="form-group">
+                <button id="enable-after-delay-btn" class="btn btn-primary" disabled data-testid="enable-after-delay">
+                    Will enable in 3 seconds
+                </button>
+            </div>
+
+            <div class="form-group">
+                <h3>Mock API Calls</h3>
+                <button id="api-success-btn" class="btn btn-primary" data-testid="api-success">Simulate Success</button>
+                <button id="api-error-btn" class="btn btn-primary" data-testid="api-error">Simulate Error</button>
+                <div id="api-result" class="result-box" data-testid="api-result"></div>
+            </div>
+        </section>
+
+        <!-- Section F: Advanced Elements -->
+        <section id="advanced" class="section">
+            <h2>🚀 Advanced Elements</h2>
+
+            <div class="form-group">
+                <h3>iFrame Example</h3>
+                <iframe id="demo-iframe" data-testid="demo-iframe" srcdoc="<html><body><h1>iFrame Content</h1><button id='iframe-btn'>Click Me Inside iFrame</button><p id='iframe-result'></p></body></html>" style="width: 100%; height: 150px; border: 1px solid #ddd;"></iframe>
+            </div>
+
+            <div class="form-group">
+                <h3>Shadow DOM Component</h3>
+                <div id="shadow-host" data-testid="shadow-host"></div>
+            </div>
+
+            <div class="form-group">
+                <h3>Canvas Element</h3>
+                <canvas id="demo-canvas" data-testid="demo-canvas" width="300" height="150"></canvas>
+            </div>
+        </section>
+
+        <!-- Section G: Authentication -->
+        <section id="auth" class="section">
+            <h2>🔐 Authentication Mock</h2>
+
+            <div id="login-form" data-testid="login-form">
+                <h3>Login</h3>
+                <div class="form-group">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" data-testid="username" placeholder="demo">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" data-testid="password" placeholder="password123">
+                </div>
+                <button id="login-btn" class="btn btn-primary" data-testid="login-btn">Login</button>
+                <div id="login-error" class="error-message" data-testid="login-error"></div>
+                <p class="hint">Hint: username: <code>demo</code>, password: <code>password123</code></p>
+            </div>
+
+            <div id="dashboard" class="dashboard" data-testid="dashboard" style="display: none;">
+                <h3>Dashboard</h3>
+                <p>Welcome, <span id="dashboard-user"></span>!</p>
+                <div class="dashboard-content">
+                    <div class="card">
+                        <h4>Total Users</h4>
+                        <p class="stat">1,234</p>
+                    </div>
+                    <div class="card">
+                        <h4>Active Sessions</h4>
+                        <p class="stat">56</p>
+                    </div>
+                    <div class="card">
+                        <h4>Tests Passed</h4>
+                        <p class="stat">98%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal -->
+    <div id="modal" class="modal" data-testid="modal">
+        <div class="modal-content">
+            <span class="close" data-testid="modal-close">&times;</span>
+            <h2>Modal Title</h2>
+            <p>This is a modal dialog. Perfect for testing overlays and interactions!</p>
+            <button class="btn btn-primary" data-testid="modal-confirm">Confirm</button>
+        </div>
+    </div>
+
+    <!-- Tooltip -->
+    <div id="tooltip" class="tooltip" data-testid="tooltip">This is a tooltip!</div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast" data-testid="toast">
+        <span id="toast-message">Toast notification message</span>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="http://pragmatictestlabs.com/wp-content/uploads/2016/09/PTL-Logo-2.png"
+                     alt="Pragmatic Test Labs"
+                     class="footer-logo-img"
+                     onerror="this.style.display='none'">
+            </div>
+            <div class="footer-text">
+                <p><strong>Pragmatic Test Labs</strong></p>
+                <p>&copy; 2025 Playwright Training Demo App | Professional Automation Testing Practice</p>
+                <p class="footer-links">
+                    <a href="http://pragmatictestlabs.com" target="_blank" rel="noopener">Visit PTL</a> |
+                    <a href="https://playwright.dev" target="_blank" rel="noopener">Playwright Docs</a> |
+                    <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/scripts.js"></script>
+</body>
+</html>
+
