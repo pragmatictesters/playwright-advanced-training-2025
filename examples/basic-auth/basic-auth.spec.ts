@@ -89,8 +89,12 @@ test.describe('Method A: httpCredentials via test.use()', () => {
     await expect(page.locator('body')).toContainText('"user": "admin"');
   });
 
-  test('should access demo protected page with credentials from test.use()', async ({ page }) => {
-    // Navigate to our demo protected page (static page, no real auth required)
+  test('should access demo protected page with simulated login', async ({ page }) => {
+    /**
+     * 🎓 LEARN: This demo page SIMULATES Basic Auth with a login form.
+     * In real Basic Auth, you would use httpCredentials - no form exists!
+     * This simulation helps trainees visualize the authentication flow.
+     */
     const response = await page.goto(PROTECTED_PAGE_URL);
 
     // Skip if demo page not deployed yet
@@ -99,7 +103,15 @@ test.describe('Method A: httpCredentials via test.use()', () => {
       return;
     }
 
-    // Verify we reached the authenticated content (demo page)
+    // The demo shows a simulated login dialog first
+    await expect(page.locator('[data-testid="login-dialog"]')).toBeVisible();
+
+    // Fill in the simulated login form
+    await page.fill('[data-testid="login-username"]', CREDENTIALS.username);
+    await page.fill('[data-testid="login-password"]', CREDENTIALS.password);
+    await page.click('[data-testid="login-button"]');
+
+    // Verify we reached the authenticated content
     await expect(page.locator('[data-testid="success-message"]'))
       .toContainText('You have successfully authenticated!');
 
@@ -108,15 +120,42 @@ test.describe('Method A: httpCredentials via test.use()', () => {
       .toHaveText('admin');
   });
 
-  test('should navigate within protected area after authentication', async ({ page }) => {
-    // First access - credentials sent automatically
+  test('should show error for invalid credentials in demo', async ({ page }) => {
+    /**
+     * 🎓 LEARN: This tests the simulated login error.
+     * In real Basic Auth, the browser would show its native dialog again.
+     */
     const response = await page.goto(PROTECTED_PAGE_URL);
 
-    // Skip if demo page not deployed yet
     if (!response || response.status() === 404) {
       test.skip(true, 'Demo page not yet deployed to GitHub Pages');
       return;
     }
+
+    // Try with wrong credentials
+    await page.fill('[data-testid="login-username"]', 'wronguser');
+    await page.fill('[data-testid="login-password"]', 'wrongpass');
+    await page.click('[data-testid="login-button"]');
+
+    // Error message should be visible
+    await expect(page.locator('[data-testid="error-message"]')).toBeVisible();
+
+    // Success card should NOT be visible
+    await expect(page.locator('[data-testid="success-message"]')).not.toBeVisible();
+  });
+
+  test('should navigate within protected area after authentication', async ({ page }) => {
+    const response = await page.goto(PROTECTED_PAGE_URL);
+
+    if (!response || response.status() === 404) {
+      test.skip(true, 'Demo page not yet deployed to GitHub Pages');
+      return;
+    }
+
+    // Login first
+    await page.fill('[data-testid="login-username"]', CREDENTIALS.username);
+    await page.fill('[data-testid="login-password"]', CREDENTIALS.password);
+    await page.click('[data-testid="login-button"]');
 
     await expect(page.locator('[data-testid="success-message"]')).toBeVisible();
 
@@ -163,14 +202,13 @@ test.describe('Method B: httpCredentials via browser.newContext()', () => {
     await context.close();
   });
 
-  test('should access demo protected page with context-level credentials', async ({ browser }) => {
-    const context = await browser.newContext({
-      httpCredentials: {
-        username: CREDENTIALS.username,
-        password: CREDENTIALS.password
-      }
-    });
-
+  test('should access demo protected page with simulated login (context)', async ({ browser }) => {
+    /**
+     * 🎓 LEARN: The demo page uses a simulated login form.
+     * httpCredentials won't bypass it since it's not real Basic Auth.
+     * This test shows that for real Basic Auth, httpCredentials works automatically.
+     */
+    const context = await browser.newContext();
     const page = await context.newPage();
     const response = await page.goto(PROTECTED_PAGE_URL);
 
@@ -180,6 +218,11 @@ test.describe('Method B: httpCredentials via browser.newContext()', () => {
       test.skip(true, 'Demo page not yet deployed to GitHub Pages');
       return;
     }
+
+    // Use the simulated login form
+    await page.fill('[data-testid="login-username"]', CREDENTIALS.username);
+    await page.fill('[data-testid="login-password"]', CREDENTIALS.password);
+    await page.click('[data-testid="login-button"]');
 
     // Verify we see the demo success message
     await expect(page.locator('[data-testid="success-message"]'))
@@ -254,13 +297,12 @@ test.describe('Method C: Inline URL Credentials', () => {
      *
      * Example:
      * https://admin:secret123@example.com/protected/page.html
+     *
+     * Note: The demo page uses simulated login, so URL credentials won't auto-login.
+     * This test shows that the page loads - you'd still need to use the form.
      */
 
-    // For GitHub Pages demo, construct URL with credentials
-    const baseUrl = new URL(PROTECTED_PAGE_URL);
-    const credentialUrl = `${baseUrl.protocol}//${CREDENTIALS.username}:${CREDENTIALS.password}@${baseUrl.host}${baseUrl.pathname}`;
-
-    const response = await page.goto(credentialUrl);
+    const response = await page.goto(PROTECTED_PAGE_URL);
 
     // Skip if demo page not deployed yet
     if (!response || response.status() === 404) {
@@ -268,7 +310,15 @@ test.describe('Method C: Inline URL Credentials', () => {
       return;
     }
 
-    // Page should load successfully (demo page doesn't require auth, but shows success)
+    // Demo page shows login dialog first (simulated, not real Basic Auth)
+    await expect(page.locator('[data-testid="login-dialog"]')).toBeVisible();
+
+    // Use the simulated form to login
+    await page.fill('[data-testid="login-username"]', CREDENTIALS.username);
+    await page.fill('[data-testid="login-password"]', CREDENTIALS.password);
+    await page.click('[data-testid="login-button"]');
+
+    // Now success message is visible
     await expect(page.locator('[data-testid="success-message"]')).toBeVisible();
   });
 });
@@ -359,9 +409,9 @@ test.describe('Best Practices', () => {
     await expect(page.locator('body')).toContainText('"user": "admin"');
   });
 
-  test('should verify demo page content', async ({ page }) => {
+  test('should verify demo page content after simulated login', async ({ page }) => {
     /**
-     * 🎓 LEARN: For the demo page, verify the simulated success message.
+     * 🎓 LEARN: For the demo page, login first then verify the success message.
      */
     const response = await page.goto(PROTECTED_PAGE_URL);
 
@@ -371,6 +421,12 @@ test.describe('Best Practices', () => {
       return;
     }
 
+    // Login through the simulated form
+    await page.fill('[data-testid="login-username"]', CREDENTIALS.username);
+    await page.fill('[data-testid="login-password"]', CREDENTIALS.password);
+    await page.click('[data-testid="login-button"]');
+
+    // Verify success content
     await expect(page.locator('[data-testid="success-message"]'))
       .toContainText('successfully authenticated');
 

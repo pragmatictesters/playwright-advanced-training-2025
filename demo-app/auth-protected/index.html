@@ -25,27 +25,125 @@
             max-width: 700px;
             width: 100%;
         }
-        .auth-notice {
-            background: #fff3cd;
-            border: 2px solid #ffc107;
+        /* Login Dialog Simulation */
+        .login-dialog {
+            background: white;
             border-radius: 12px;
-            padding: 20px;
-            margin-bottom: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
             text-align: center;
+            margin-bottom: 20px;
         }
-        .auth-notice h2 {
+        .login-dialog.hidden {
+            display: none;
+        }
+        .dialog-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .dialog-header .lock-icon {
+            font-size: 40px;
+        }
+        .dialog-header h2 {
+            color: #333;
+            font-size: 22px;
+        }
+        .dialog-info {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 20px;
+            font-size: 14px;
             color: #856404;
-            margin-bottom: 10px;
         }
-        .auth-notice p {
-            color: #856404;
+        .login-form {
+            text-align: left;
         }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+        .form-group input.error {
+            border-color: #e74c3c;
+            animation: shake 0.3s;
+        }
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 10px;
+            display: none;
+        }
+        .error-message.visible {
+            display: block;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(42, 82, 152, 0.4);
+        }
+        .credentials-hint {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        .credentials-hint strong {
+            color: #2e7d32;
+        }
+        .credentials-hint code {
+            background: #c8e6c9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        /* Success Card */
         .success-card {
             background: white;
             border-radius: 16px;
             padding: 40px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
             text-align: center;
+        }
+        .success-card.hidden {
+            display: none;
         }
         .success-icon {
             font-size: 80px;
@@ -101,9 +199,69 @@
             color: #1565c0;
             margin-bottom: 8px;
         }
-        .info-box p {
+        .info-box p, .info-box ul {
             color: #1565c0;
             font-size: 14px;
+        }
+        .info-box ul {
+            margin: 10px 0 0 20px;
+        }
+        .info-box li {
+            margin-bottom: 5px;
+        }
+        .info-box a {
+            color: #0d47a1;
+            text-decoration: none;
+        }
+        .info-box a:hover {
+            text-decoration: underline;
+        }
+        /* httpbin example box */
+        .httpbin-box {
+            background: #fce4ec;
+            border: 1px solid #f48fb1;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .httpbin-box h4 {
+            color: #c2185b;
+            margin-bottom: 8px;
+        }
+        .httpbin-box p {
+            color: #880e4f;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .httpbin-box code {
+            background: #f8bbd9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 13px;
+        }
+        .httpbin-box pre {
+            background: #fff;
+            border: 1px solid #f48fb1;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 12px;
+            overflow-x: auto;
+            margin-top: 10px;
+        }
+        .logout-btn {
+            margin-top: 15px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .logout-btn:hover {
+            background: #c0392b;
         }
         footer {
             margin-top: 30px;
@@ -111,28 +269,54 @@
             text-align: center;
             font-size: 14px;
         }
-        [data-testid] {
-            /* Helps identify testable elements */
-        }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Training Notice: Simulating 401 Unauthorized -->
-        <div class="auth-notice" data-testid="auth-notice">
-            <h2>⚠️ 401 Unauthorized — Requires HTTP Basic Authentication</h2>
-            <p>
-                <strong>Training Note:</strong> In a real scenario, the browser would show a native 
-                login dialog here. This page simulates what happens AFTER successful authentication.
-            </p>
+        <!-- Simulated Login Dialog (shown first) -->
+        <div class="login-dialog" id="loginDialog" data-testid="login-dialog">
+            <div class="dialog-header">
+                <span class="lock-icon">🔐</span>
+                <h2>Authentication Required</h2>
+            </div>
+
+            <div class="dialog-info">
+                <strong>⚠️ 401 Unauthorized</strong><br>
+                This simulates the browser's native Basic Auth dialog.<br>
+                In real Basic Auth, you cannot use page selectors or dialog handlers!
+            </div>
+
+            <form class="login-form" id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" data-testid="login-username"
+                           placeholder="Enter username" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" data-testid="login-password"
+                           placeholder="Enter password" autocomplete="off">
+                </div>
+                <div class="error-message" id="errorMessage" data-testid="error-message">
+                    ❌ Invalid credentials. Please try again.
+                </div>
+                <button type="submit" class="login-btn" data-testid="login-button">
+                    Sign In
+                </button>
+            </form>
+
+            <div class="credentials-hint">
+                <strong>💡 Hint for Training:</strong><br>
+                Username: <code>admin</code> | Password: <code>secret123</code>
+            </div>
         </div>
 
-        <!-- Success Card -->
-        <div class="success-card">
+        <!-- Success Card (shown after authentication) -->
+        <div class="success-card hidden" id="successCard">
             <div class="success-icon">✅</div>
             <h1 data-testid="success-message">You have successfully authenticated!</h1>
             <p>
-                Welcome to the protected area. This page is only accessible after providing 
+                Welcome to the protected area. This page is only accessible after providing
                 valid HTTP Basic Authentication credentials.
             </p>
 
@@ -147,11 +331,48 @@
             <div class="info-box">
                 <h4>💡 For Playwright Tests</h4>
                 <p>
-                    Use <code>httpCredentials</code> in your browser context or Playwright config 
-                    to authenticate. Standard page selectors and dialog handlers will NOT work 
+                    Use <code>httpCredentials</code> in your browser context or Playwright config
+                    to authenticate. Standard page selectors and dialog handlers will NOT work
                     with HTTP Basic Auth prompts.
                 </p>
+                <ul>
+                    <li><code>test.use({ httpCredentials: { username, password } })</code></li>
+                    <li><code>browser.newContext({ httpCredentials: {...} })</code></li>
+                    <li>Inline URL: <code>https://user:pass@example.com</code></li>
+                </ul>
             </div>
+
+            <div class="httpbin-box">
+                <h4>🌐 Test with REAL Basic Auth (httpbin.org)</h4>
+                <p>
+                    For real HTTP 401 authentication testing, use httpbin.org:
+                </p>
+                <p>
+                    <a href="https://httpbin.org/basic-auth/admin/secret123" target="_blank">
+                        <code>https://httpbin.org/basic-auth/admin/secret123</code>
+                    </a>
+                </p>
+                <p style="margin-top: 10px;">
+                    <strong>Playwright Example:</strong>
+                </p>
+                <pre>test('real basic auth', async ({ browser }) => {
+  const context = await browser.newContext({
+    httpCredentials: {
+      username: 'admin',
+      password: 'secret123'
+    }
+  });
+  const page = await context.newPage();
+  await page.goto('https://httpbin.org/basic-auth/admin/secret123');
+
+  // Returns: { "authenticated": true, "user": "admin" }
+  await expect(page.locator('body')).toContainText('"authenticated": true');
+});</pre>
+            </div>
+
+            <button class="logout-btn" onclick="handleLogout()" data-testid="logout-button">
+                🔓 Logout (Reset Demo)
+            </button>
 
             <div class="back-link">
                 <a href="../index.html" data-testid="back-link">← Back to Demo App</a>
@@ -162,6 +383,73 @@
     <footer>
         <p>Pragmatic Test Labs — Playwright Training Demo</p>
     </footer>
+
+    <script>
+        // Valid credentials for the simulation
+        const VALID_CREDENTIALS = {
+            username: 'admin',
+            password: 'secret123'
+        };
+
+        // Check if already authenticated (using sessionStorage)
+        function checkAuth() {
+            const isAuthenticated = sessionStorage.getItem('basicAuthDemo') === 'authenticated';
+            if (isAuthenticated) {
+                showSuccessCard();
+            }
+        }
+
+        // Handle login form submission
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const usernameInput = document.getElementById('username');
+            const passwordInput = document.getElementById('password');
+            const errorMessage = document.getElementById('errorMessage');
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value;
+
+            // Validate credentials
+            if (username === VALID_CREDENTIALS.username && password === VALID_CREDENTIALS.password) {
+                // Success - store auth state and show success card
+                sessionStorage.setItem('basicAuthDemo', 'authenticated');
+                showSuccessCard();
+            } else {
+                // Failed - show error
+                errorMessage.classList.add('visible');
+                usernameInput.classList.add('error');
+                passwordInput.classList.add('error');
+
+                // Remove error styling after animation
+                setTimeout(() => {
+                    usernameInput.classList.remove('error');
+                    passwordInput.classList.remove('error');
+                }, 300);
+            }
+
+            return false;
+        }
+
+        // Show the success card
+        function showSuccessCard() {
+            document.getElementById('loginDialog').classList.add('hidden');
+            document.getElementById('successCard').classList.remove('hidden');
+        }
+
+        // Handle logout (reset demo)
+        function handleLogout() {
+            sessionStorage.removeItem('basicAuthDemo');
+            document.getElementById('successCard').classList.add('hidden');
+            document.getElementById('loginDialog').classList.remove('hidden');
+            document.getElementById('errorMessage').classList.remove('visible');
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+
+        // Check auth state on page load
+        checkAuth();
+    </script>
 </body>
 </html>
 
