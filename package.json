@@ -29,6 +29,9 @@
     "demo:fixtures:custom": "playwright test tests/examples/fixtures/04-custom-fixtures.spec.ts",
     "demo:fixtures:composition": "playwright test tests/examples/fixtures/05-fixture-composition.spec.ts",
     "demo:fixtures:all": "playwright test tests/examples/fixtures --project=chromium",
+    "demo:logging": "playwright test tests/examples/logging",
+    "demo:logging:basics": "playwright test tests/examples/logging/01-logging-basics.spec.ts",
+    "demo:logging:manager": "playwright test tests/examples/logging/02-logging-with-manager.spec.ts",
     "test:saucedemo:pom": "playwright test tests/saucedemo/pom",
     "test:saucedemo:fixtures": "playwright test tests/saucedemo/fixtures",
     "test:saucedemo:pom:login": "playwright test tests/saucedemo/pom/login-pom.spec.ts",
@@ -67,6 +70,7 @@
     "@faker-js/faker": "^10.1.0",
     "@playwright/test": "^1.56.1",
     "@types/node": "^24.10.0",
+    "allure-playwright": "^3.4.2",
     "csv-parse": "^5.6.0"
   }
 }
