@@ -22,7 +22,8 @@ Start here if you're new to test automation:
 2. **[Playwright Overview](02-playwright-overview.md)** - Tool comparison and Playwright's strengths
 3. **[Getting Started Checklist](03-getting-started.md)** - Before you write your first test
 4. **[Package Management](04-package-management.md)** - Understanding npm and dependencies
-5. Then proceed to [Installation Guide](../installation/README.md)
+5. **[TypeScript Essentials](05-typescript-essentials.md)** - Must-know TypeScript for Playwright
+6. Then proceed to [Installation Guide](../installation/README.md)
 
 ### For Experienced Testers
 If you're familiar with test automation but new to Playwright:
@@ -89,6 +90,19 @@ Essential knowledge:
 - Common mistakes and solutions
 - Best practices for development and CI/CD
 
+### [TypeScript Essentials](05-typescript-essentials.md)
+**Time**: 25 minutes | **For**: Beginners new to TypeScript/JavaScript
+
+Must-know concepts for Playwright:
+- Variables: `const`, `let` (never `var`)
+- Arrow functions and callbacks
+- **Async/Await** - Critical for all Playwright actions
+- Destructuring - Used in `{ page }` fixtures
+- Template literals - Dynamic selectors and URLs
+- Array methods - Data-driven testing
+- Interfaces - Type-safe test data
+- Common mistakes and how to avoid them
+
 ## 🎓 Why Start with Fundamentals?
 
 ### Understanding Before Doing
@@ -128,6 +142,7 @@ After completing the fundamentals:
 - [Playwright Overview](02-playwright-overview.md)
 - [Getting Started Checklist](03-getting-started.md)
 - [Package Management](04-package-management.md)
+- [TypeScript Essentials](05-typescript-essentials.md)
 - [→ Continue to Installation](../installation/README.md)
 - [← Back to Main README](../../README.md)
 
