@@ -123,8 +123,8 @@ test.describe('Method A: httpCredentials via test.use()', () => {
     // Navigate back to main app
     await page.click('[data-testid="back-link"]');
 
-    // Verify we're on the main demo app
-    await expect(page).toHaveURL(/demo-app\/?$/);
+    // Verify we're on the main demo app (could be /demo-app/ or /demo-app/index.html)
+    await expect(page).toHaveURL(/demo-app\/(index\.html)?$/);
   });
 });
 
