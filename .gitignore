@@ -145,5 +145,11 @@ vite.config.ts.timestamp-*
 /playwright/.cache/
 /playwright/.auth/
 
-# Homework 
-/homework/
+# Homework submissions (ignored, but feedback is tracked)
+/homework/submissions/
+# Track feedback documents
+!/homework/feedback/
+
+# Add allure report and results 
+/allure-report/
+/allure-results/
