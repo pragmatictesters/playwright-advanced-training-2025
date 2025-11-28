@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Protected Page - HTTP Basic Auth Demo</title>
+    <link rel="icon" type="image/png" href="../assets/ptl-favicon.png">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 700px;
+            width: 100%;
+        }
+        .auth-notice {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .auth-notice h2 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        .auth-notice p {
+            color: #856404;
+        }
+        .success-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+        .success-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+        .success-card h1 {
+            color: #27ae60;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+        .success-card p {
+            color: #666;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        .credentials-display {
+            background: #e8f5e9;
+            border: 1px solid #a5d6a7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 25px;
+        }
+        .credentials-display h3 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+        .credentials-display code {
+            background: #c8e6c9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        .back-link {
+            margin-top: 25px;
+        }
+        .back-link a {
+            color: #2a5298;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+        .info-box {
+            background: #e3f2fd;
+            border: 1px solid #90caf9;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        .info-box h4 {
+            color: #1565c0;
+            margin-bottom: 8px;
+        }
+        .info-box p {
+            color: #1565c0;
+            font-size: 14px;
+        }
+        footer {
+            margin-top: 30px;
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            font-size: 14px;
+        }
+        [data-testid] {
+            /* Helps identify testable elements */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Training Notice: Simulating 401 Unauthorized -->
+        <div class="auth-notice" data-testid="auth-notice">
+            <h2>⚠️ 401 Unauthorized — Requires HTTP Basic Authentication</h2>
+            <p>
+                <strong>Training Note:</strong> In a real scenario, the browser would show a native 
+                login dialog here. This page simulates what happens AFTER successful authentication.
+            </p>
+        </div>
+
+        <!-- Success Card -->
+        <div class="success-card">
+            <div class="success-icon">✅</div>
+            <h1 data-testid="success-message">You have successfully authenticated!</h1>
+            <p>
+                Welcome to the protected area. This page is only accessible after providing 
+                valid HTTP Basic Authentication credentials.
+            </p>
+
+            <div class="credentials-display">
+                <h3>🔑 Credentials Used</h3>
+                <p>
+                    Username: <code data-testid="auth-username">admin</code><br>
+                    Password: <code data-testid="auth-password">secret123</code>
+                </p>
+            </div>
+
+            <div class="info-box">
+                <h4>💡 For Playwright Tests</h4>
+                <p>
+                    Use <code>httpCredentials</code> in your browser context or Playwright config 
+                    to authenticate. Standard page selectors and dialog handlers will NOT work 
+                    with HTTP Basic Auth prompts.
+                </p>
+            </div>
+
+            <div class="back-link">
+                <a href="../index.html" data-testid="back-link">← Back to Demo App</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Pragmatic Test Labs — Playwright Training Demo</p>
+    </footer>
+</body>
+</html>
+
