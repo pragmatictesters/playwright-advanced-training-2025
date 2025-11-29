@@ -1,6 +1,10 @@
 import { test as base, expect, Page } from '@playwright/test';
 import { LoginPage } from '../pages/saucedemo/login-page';
 import { ProductsPage } from '../pages/saucedemo/products-page';
+import { CartPage } from '../pages/saucedemo/cart-page';
+import { CheckoutStepOnePage } from '../pages/saucedemo/checkout-step-one-page';
+import { CheckoutStepTwoPage } from '../pages/saucedemo/checkout-step-two-page';
+import { CheckoutCompletePage } from '../pages/saucedemo/checkout-complete-page';
 
 /**
  * Custom Fixtures for SauceDemo Tests
@@ -27,6 +31,10 @@ import { ProductsPage } from '../pages/saucedemo/products-page';
 type SauceDemoFixtures = {
   loginPage: LoginPage;
   productsPage: ProductsPage;
+  cartPage: CartPage;
+  checkoutStepOnePage: CheckoutStepOnePage;
+  checkoutStepTwoPage: CheckoutStepTwoPage;
+  checkoutCompletePage: CheckoutCompletePage;
   authenticatedPage: Page;
 };
 
@@ -54,13 +62,40 @@ export const test = base.extend<SauceDemoFixtures>({
    * Automatically creates a ProductsPage instance for each test
    */
   productsPage: async ({ page }, use) => {
-    // Setup: Create ProductsPage instance
     const productsPage = new ProductsPage(page);
-    
-    // Provide the fixture to the test
     await use(productsPage);
-    
-    // Teardown: Nothing to clean up
+  },
+
+  /**
+   * CartPage fixture
+   */
+  cartPage: async ({ page }, use) => {
+    const cartPage = new CartPage(page);
+    await use(cartPage);
+  },
+
+  /**
+   * CheckoutStepOnePage fixture
+   */
+  checkoutStepOnePage: async ({ page }, use) => {
+    const checkoutPage = new CheckoutStepOnePage(page);
+    await use(checkoutPage);
+  },
+
+  /**
+   * CheckoutStepTwoPage fixture
+   */
+  checkoutStepTwoPage: async ({ page }, use) => {
+    const checkoutPage = new CheckoutStepTwoPage(page);
+    await use(checkoutPage);
+  },
+
+  /**
+   * CheckoutCompletePage fixture
+   */
+  checkoutCompletePage: async ({ page }, use) => {
+    const completePage = new CheckoutCompletePage(page);
+    await use(completePage);
   },
 
   /**
