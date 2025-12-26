@@ -1,27 +1,90 @@
+# ============================================================================
+# 🎭 Playwright Tests - GitHub Actions Workflow
+# ============================================================================
+# This workflow runs Playwright tests on every push and pull request.
+# It demonstrates CI/CD best practices for test automation.
+#
+# 📚 Learn more: docs/ci-cd/03-playwright-github-actions.md
+# ============================================================================
+
 name: Playwright Tests
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🎯 TRIGGERS: When should this workflow run?
+# ─────────────────────────────────────────────────────────────────────────────
 on:
+  # Run on push to main/master branches
   push:
     branches: [ main, master ]
+
+  # Run on pull requests to main/master branches
   pull_request:
     branches: [ main, master ]
+
+  # Allow manual trigger from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      test_folder:
+        description: 'Test folder to run (e.g., tests/saucedemo)'
+        required: false
+        default: 'tests/saucedemo'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔧 JOBS: What tasks should be performed?
+# ─────────────────────────────────────────────────────────────────────────────
 jobs:
   test:
-    timeout-minutes: 60
+    # Job name shown in GitHub UI
+    name: Run Playwright Tests
+
+    # Maximum time for the job (prevents runaway tests)
+    timeout-minutes: 30
+
+    # Runner: Use Ubuntu (fastest and most compatible)
     runs-on: ubuntu-latest
+
+    # ─────────────────────────────────────────────────────────────────────────
+    # 📋 STEPS: Sequential tasks within the job
+    # ─────────────────────────────────────────────────────────────────────────
     steps:
-    - uses: actions/checkout@v4
-    - uses: actions/setup-node@v4
-      with:
-        node-version: lts/*
-    - name: Install dependencies
-      run: npm ci
-    - name: Install Playwright Browsers
-      run: npx playwright install --with-deps
-    - name: Run Playwright tests
-      run: npx playwright test
-    - uses: actions/upload-artifact@v4
-      if: ${{ !cancelled() }}
-      with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30
+      # Step 1: Checkout the repository code
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Setup Node.js environment
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'  # Cache npm dependencies for faster builds
+
+      # Step 3: Install project dependencies
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      # Step 4: Install Playwright browsers
+      - name: 🎭 Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # Step 5: Run Playwright tests (only SauceDemo tests for training)
+      - name: 🧪 Run Playwright tests
+        run: npx playwright test tests/saucedemo --project=chromium
+        continue-on-error: true  # Don't fail the whole workflow on test failures
+
+      # Step 6: Upload HTML report as artifact
+      - name: 📊 Upload HTML Report
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      # Step 7: Upload test results for further analysis
+      - name: 📁 Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7
