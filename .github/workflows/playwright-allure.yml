@@ -1,0 +1,151 @@
+# ============================================================================
+# 🎭 Playwright Tests with Allure Report
+# ============================================================================
+# This workflow runs Playwright tests and publishes Allure reports to GitHub Pages.
+# Reports include trends, history, and test comparison across runs.
+#
+# 📊 View reports at: https://pragmatictesters.github.io/playwright-advanced-training-2025
+# 📚 Learn more: docs/ci-cd/06-allure-reports.md
+# ============================================================================
+
+name: Playwright Tests with Allure Report
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+  workflow_dispatch:
+    inputs:
+      test_folder:
+        description: 'Test folder to run'
+        required: false
+        default: 'tests/saucedemo'
+
+# ─────────────────────────────────────────────────────────────────────────────
+# 🔐 PERMISSIONS: Required for GitHub Pages deployment
+# ─────────────────────────────────────────────────────────────────────────────
+permissions:
+  contents: write       # To push to gh-pages branch
+  pages: write          # To deploy to GitHub Pages
+  id-token: write       # For OIDC authentication
+
+jobs:
+  test:
+    name: 🧪 Run Tests & Generate Report
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      # ─────────────────────────────────────────────────────────────────────────
+      # 📥 SETUP: Prepare the environment
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Playwright Browsers
+        run: npx playwright install --with-deps chromium
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 📜 HISTORY: Download previous Allure history for trends
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 📜 Download previous Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: 📂 Copy previous history
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p allure-results/history
+          if [ -d "gh-pages/history" ]; then
+            cp -r gh-pages/history/* allure-results/history/ || true
+            echo "✅ Previous history copied"
+          else
+            echo "ℹ️ No previous history found (first run)"
+          fi
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 🧪 TEST: Run Playwright tests
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 🧪 Run Playwright tests
+        run: npx playwright test tests/saucedemo --project=chromium
+        continue-on-error: true
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 📊 REPORT: Generate Allure report
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: ☕ Setup Java (required for Allure)
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: 📊 Generate Allure Report
+        uses: simple-elf/allure-report-action@v1.12
+        if: always()
+        with:
+          allure_results: allure-results
+          allure_history: allure-history
+          keep_reports: 20
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 🚀 DEPLOY: Publish report to GitHub Pages
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        if: always() && github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
+          destination_dir: ./
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 📎 ARTIFACTS: Save reports for download
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 📎 Upload Allure Results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-results
+          path: allure-results/
+          retention-days: 7
+
+      - name: 📊 Upload Playwright HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 📝 SUMMARY: Add report link to workflow summary
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: 📝 Add Report Link to Summary
+        if: always()
+        run: |
+          echo "## 📊 Allure Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 **View Report:** https://pragmatictesters.github.io/playwright-advanced-training-2025" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📈 Features" >> $GITHUB_STEP_SUMMARY
+          echo "- ✅ Test results with detailed steps" >> $GITHUB_STEP_SUMMARY
+          echo "- 📊 Trends across multiple runs" >> $GITHUB_STEP_SUMMARY
+          echo "- 🔄 Retry analysis and flaky test detection" >> $GITHUB_STEP_SUMMARY
+          echo "- 📁 Test categories and suites" >> $GITHUB_STEP_SUMMARY
+

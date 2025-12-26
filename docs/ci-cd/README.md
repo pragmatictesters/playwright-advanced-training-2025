@@ -13,8 +13,9 @@
 | 3️⃣ | [Playwright GitHub Actions](./03-playwright-github-actions.md) | Setup and configuration guide | 25 min |
 | 4️⃣ | [YAML Basics](./04-yaml-basics.md) | YAML syntax for workflows | 20 min |
 | 5️⃣ | [Tools for Efficiency](./05-tools-for-efficiency.md) | VS Code extensions and tools | 15 min |
+| 6️⃣ | [Allure Reports](./06-allure-reports.md) | Online reports with trends | 20 min |
 
-**Total Reading Time**: ~1.5 hours
+**Total Reading Time**: ~2 hours
 
 ---
 
@@ -67,6 +68,12 @@ After completing this documentation, you will be able to:
 │   ┌─────────────────┐                                                   │
 │   │ 5. Tools &      │  ← VS Code extensions, CLI tools                  │
 │   │    Efficiency   │                                                   │
+│   └────────┬────────┘                                                   │
+│            │                                                            │
+│            ▼                                                            │
+│   ┌─────────────────┐                                                   │
+│   │ 6. Allure       │  ← Online reports with trends & history           │
+│   │    Reports      │                                                   │
 │   └────────┬────────┘                                                   │
 │            │                                                            │
 │            ▼                                                            │
