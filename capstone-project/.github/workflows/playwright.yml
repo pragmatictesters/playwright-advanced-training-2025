@@ -1,0 +1,121 @@
+# 🎭 Playwright CI/CD Pipeline for OrangeHRM Capstone Project
+# 
+# This workflow runs Playwright tests on push and pull requests
+# Supports running tests for specific trainees via workflow_dispatch
+
+name: 🎭 Playwright Tests
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      trainee:
+        description: 'Run tests for specific trainee folder (e.g., chamiya, deepika)'
+        required: false
+        default: ''
+      browser:
+        description: 'Browser to run tests on'
+        required: false
+        default: 'chromium'
+        type: choice
+        options:
+          - chromium
+          - firefox
+          - webkit
+
+jobs:
+  test:
+    name: 🧪 Run Playwright Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🟢 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 📦 Install dependencies
+        run: npm ci
+
+      - name: 🎭 Install Playwright browsers
+        run: npx playwright install --with-deps ${{ github.event.inputs.browser || 'chromium' }}
+
+      - name: 🧪 Run Playwright tests
+        run: |
+          TRAINEE="${{ github.event.inputs.trainee }}"
+          BROWSER="${{ github.event.inputs.browser || 'chromium' }}"
+          
+          if [ -n "$TRAINEE" ]; then
+            echo "🎯 Running tests for trainee: $TRAINEE"
+            npx playwright test tests/trainees/$TRAINEE/ --project=$BROWSER
+          else
+            echo "🎯 Running all tests"
+            npx playwright test --project=$BROWSER
+          fi
+        env:
+          CI: true
+          BASE_URL: ${{ secrets.BASE_URL || 'https://opensource-demo.orangehrmlive.com' }}
+
+      - name: 📊 Generate Allure Report
+        if: always()
+        run: |
+          npm install -g allure-commandline --save-dev
+          allure generate reports/allure-results -o reports/allure-report --clean
+
+      - name: 📤 Upload Playwright HTML Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-report-${{ github.event.inputs.trainee || 'all' }}
+          path: reports/html/
+          retention-days: 30
+
+      - name: 📤 Upload Allure Report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: allure-report-${{ github.event.inputs.trainee || 'all' }}
+          path: reports/allure-report/
+          retention-days: 30
+
+      - name: 📤 Upload Test Results
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: test-results
+          path: test-results/
+          retention-days: 7
+
+  # Deploy Allure Report to GitHub Pages (only on main branch)
+  deploy-report:
+    name: 🚀 Deploy Allure Report
+    needs: test
+    if: github.ref == 'refs/heads/main' && always()
+    runs-on: ubuntu-latest
+    
+    permissions:
+      pages: write
+      id-token: write
+    
+    steps:
+      - name: 📥 Download Allure Report
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report-all
+          path: allure-report
+
+      - name: 🚀 Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: allure-report
+          destination_dir: allure-report
+

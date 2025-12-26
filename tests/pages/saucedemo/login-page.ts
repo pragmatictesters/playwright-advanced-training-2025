@@ -97,6 +97,14 @@ export class LoginPage {
   }
 
   /**
+   * Clear both username and password fields
+   */
+  async clearCredentials() {
+    await this.clearUsername();
+    await this.clearPassword();
+  }
+
+  /**
    * Verify error message is displayed
    * @param expectedMessage - Expected error message text
    */
@@ -128,6 +136,18 @@ export class LoginPage {
   async isPasswordMasked(): Promise<boolean> {
     const type = await this.passwordInput.getAttribute('type');
     return type === 'password';
+  }
+
+  /**
+   * Verify login field is empty 
+   * @param field - Field to check (username or password)
+   */
+  async isFieldEmpty(field: 'username' | 'password') {
+    if (field === 'username') {
+      await expect(this.usernameInput).toHaveValue('');
+    } else if (field === 'password') {
+      await expect(this.passwordInput).toHaveValue('');
+    }
   }
 
   /**

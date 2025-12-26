@@ -1,0 +1,44 @@
+{
+  "name": "orangehrm-playwright-capstone",
+  "version": "1.0.0",
+  "description": "🎓 Playwright Capstone Project - OrangeHRM Test Automation",
+  "author": "Playwright Training Team",
+  "license": "MIT",
+  "scripts": {
+    "test": "npx playwright test",
+    "test:chromium": "npx playwright test --project=chromium",
+    "test:firefox": "npx playwright test --project=firefox",
+    "test:headed": "npx playwright test --headed",
+    "test:debug": "npx playwright test --debug",
+    "test:ui": "npx playwright test --ui",
+    "report": "npx playwright show-report",
+    "allure:generate": "allure generate reports/allure-results -o reports/allure-report --clean",
+    "allure:open": "allure open reports/allure-report",
+    "allure:serve": "allure serve reports/allure-results",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write \"**/*.ts\""
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^9.0.0",
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.0.0",
+    "allure-commandline": "^2.30.0",
+    "allure-playwright": "^3.0.0",
+    "dotenv": "^16.4.5",
+    "eslint": "^9.0.0",
+    "prettier": "^3.4.0",
+    "typescript": "^5.7.0"
+  },
+  "keywords": [
+    "playwright",
+    "testing",
+    "automation",
+    "orangehrm",
+    "typescript",
+    "e2e"
+  ],
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
+

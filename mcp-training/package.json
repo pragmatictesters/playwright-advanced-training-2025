@@ -1,0 +1,30 @@
+{
+  "name": "mcp-playwright-training",
+  "version": "1.0.0",
+  "description": "Simple MCP server for Playwright test automation training",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "dev": "tsc --watch",
+    "test": "npx playwright test"
+  },
+  "keywords": [
+    "mcp",
+    "playwright",
+    "testing",
+    "automation"
+  ],
+  "author": "Playwright Training Team",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.7.0"
+  }
+}
+

@@ -147,6 +147,7 @@ vite.config.ts.timestamp-*
 
 # Homework submissions (ignored, but feedback is tracked)
 /homework/submissions/
+/homework/deepika-day3/
 # Track feedback documents
 !/homework/feedback/
 
