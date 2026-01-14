@@ -4,6 +4,8 @@ pipeline {
     environment {
         CI = 'true'
         PLAYWRIGHT_BROWSERS_PATH = '0'
+        // Use Homebrew Node.js path (adjust if needed)
+        PATH = "/opt/homebrew/bin:/usr/local/bin:${env.PATH}"
     }
 
     stages {
@@ -13,36 +15,28 @@ pipeline {
             }
         }
 
-        stage('Setup Node.js') {
+        stage('Verify Node.js') {
             steps {
-                nodejs('NodeJS') {
-                    sh 'node --version'
-                    sh 'npm --version'
-                }
+                sh 'node --version'
+                sh 'npm --version'
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                nodejs('NodeJS') {
-                    sh 'npm ci'
-                }
+                sh 'npm ci'
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                nodejs('NodeJS') {
-                    sh 'npx playwright install --with-deps chromium'
-                }
+                sh 'npx playwright install --with-deps chromium'
             }
         }
 
         stage('Run Tests') {
             steps {
-                nodejs('NodeJS') {
-                    sh 'npx playwright test --project=chromium'
-                }
+                sh 'npx playwright test --project=chromium'
             }
         }
     }
@@ -50,7 +44,6 @@ pipeline {
     post {
         always {
             script {
-                // Only publish if workspace exists
                 if (fileExists('playwright-report/index.html')) {
                     publishHTML(target: [
                         allowMissing: true,
