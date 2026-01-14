@@ -14,15 +14,39 @@ pipeline {
             }
         }
 
-        stage('Verify Node.js') {
+        stage('Verify Environment') {
             steps {
                 script {
+                    echo "========== Environment Variables =========="
+                    echo "JENKINS_HOME: ${JENKINS_HOME}"
+                    echo "WORKSPACE: ${WORKSPACE}"
+                    echo "PLAYWRIGHT_BROWSERS_PATH: ${env.PLAYWRIGHT_BROWSERS_PATH}"
+                    echo "CI: ${env.CI}"
+                    echo "==========================================="
+
                     if (isUnix()) {
-                        sh 'node --version'
-                        sh 'npm --version'
+                        sh '''
+                            echo "Node.js version: $(node --version)"
+                            echo "npm version: $(npm --version)"
+                            echo ""
+                            echo "Checking browser cache location..."
+                            echo "PLAYWRIGHT_BROWSERS_PATH=$PLAYWRIGHT_BROWSERS_PATH"
+                            if [ -d "$PLAYWRIGHT_BROWSERS_PATH" ]; then
+                                echo "Cache directory exists. Contents:"
+                                ls -la "$PLAYWRIGHT_BROWSERS_PATH" || echo "Empty or not accessible"
+                            else
+                                echo "Cache directory does NOT exist yet"
+                            fi
+                            echo ""
+                            echo "Checking workspace node_modules browsers..."
+                            if [ -d "node_modules" ]; then
+                                find node_modules -type d -name ".local-browsers" 2>/dev/null || echo "No .local-browsers found"
+                            fi
+                        '''
                     } else {
                         bat 'node --version'
                         bat 'npm --version'
+                        bat 'echo PLAYWRIGHT_BROWSERS_PATH=%PLAYWRIGHT_BROWSERS_PATH%'
                     }
                 }
             }
