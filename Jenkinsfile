@@ -91,9 +91,11 @@ pipeline {
             echo '✅ All tests passed!'
         }
 
-        cleanup {
-            cleanWs()
-        }
+        // Workspace is preserved to cache npm packages and Playwright browsers
+        // Uncomment below to clean workspace after each build:
+        // cleanup {
+        //     cleanWs()
+        // }
     }
 }
 
