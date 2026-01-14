@@ -3,7 +3,8 @@ pipeline {
 
     environment {
         CI = 'true'
-        PLAYWRIGHT_BROWSERS_PATH = '0'
+        // Store browsers outside workspace so they persist after cleanWs()
+        PLAYWRIGHT_BROWSERS_PATH = '/Users/janesh/.cache/ms-playwright'
         // Use Homebrew Node.js path (adjust if needed)
         PATH = "/opt/homebrew/bin:/usr/local/bin:${env.PATH}"
     }
