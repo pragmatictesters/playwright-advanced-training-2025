@@ -3,10 +3,8 @@ pipeline {
 
     environment {
         CI = 'true'
-        // Store browsers outside workspace so they persist after cleanWs()
-        PLAYWRIGHT_BROWSERS_PATH = '/Users/janesh/.cache/ms-playwright'
-        // Use Homebrew Node.js path (adjust if needed)
-        PATH = "/opt/homebrew/bin:/usr/local/bin:${env.PATH}"
+        // Store browsers in Jenkins home (works on Windows, Mac, Linux)
+        PLAYWRIGHT_BROWSERS_PATH = "${JENKINS_HOME}/.cache/ms-playwright"
     }
 
     stages {
@@ -18,32 +16,58 @@ pipeline {
 
         stage('Verify Node.js') {
             steps {
-                sh 'node --version'
-                sh 'npm --version'
+                script {
+                    if (isUnix()) {
+                        sh 'node --version'
+                        sh 'npm --version'
+                    } else {
+                        bat 'node --version'
+                        bat 'npm --version'
+                    }
+                }
             }
         }
 
         stage('Install Dependencies') {
             steps {
-                sh 'npm ci'
+                script {
+                    if (isUnix()) {
+                        sh 'npm ci'
+                    } else {
+                        bat 'npm ci'
+                    }
+                }
             }
         }
 
         stage('Install Playwright Browsers') {
             steps {
-                sh 'npx playwright install --with-deps chromium'
+                script {
+                    if (isUnix()) {
+                        sh 'npx playwright install --with-deps chromium'
+                    } else {
+                        // Windows doesn't support --with-deps, install separately
+                        bat 'npx playwright install chromium'
+                    }
+                }
             }
         }
 
         stage('Run Tests') {
             steps {
-                // Exclude example/demo tests that have known issues
-                sh '''
-                    npx playwright test --project=chromium \
-                        --ignore-pattern="**/examples/**" \
-                        --ignore-pattern="**/logging/**" \
-                        --ignore-pattern="**/login.spec.ts"
-                '''
+                script {
+                    // Exclude example/demo tests that have known issues
+                    if (isUnix()) {
+                        sh '''
+                            npx playwright test --project=chromium \
+                                --ignore-pattern="**/examples/**" \
+                                --ignore-pattern="**/logging/**" \
+                                --ignore-pattern="**/login.spec.ts"
+                        '''
+                    } else {
+                        bat 'npx playwright test --project=chromium --ignore-pattern="**/examples/**" --ignore-pattern="**/logging/**" --ignore-pattern="**/login.spec.ts"'
+                    }
+                }
             }
         }
     }
